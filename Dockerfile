@@ -1,4 +1,4 @@
-FROM jupyter/minimal-notebook:87210526f381
+FROM jupyter/minimal-notebook:83ed2c63671f
 
 USER root
 
@@ -80,16 +80,17 @@ RUN set -eux; \
 
 USER 1000
 
-RUN /opt/conda/bin/conda update ipykernel; \
-    /opt/conda/bin/conda clean --all; \
-    /opt/conda/bin/conda update --all; \
-    /opt/conda/bin/conda install matplotlib;
+RUN /opt/conda/bin/conda install matplotlib;
 
 RUN julia -e ' \
         Pkg.init(); Pkg.update(); \
         Pkg.add("Compat"); using Compat; \
         Pkg.add("IJulia"); using IJulia; \
         Pkg.add("StatsBase"); using StatsBase; \
+        Pkg.add("CSV"); using CSV; \
+        Pkg.add("Bio"); using Bio; \
+        Pkg.add("Gadfly"); using Gadfly; \
+        Pkg.add("FreqTables"); using FreqTables; \
         Pkg.clone("https://github.com/MurrellGroup/Rifraf.jl"); using Rifraf; \
         Pkg.clone("https://github.com/MurrellGroup/NextGenSeqUtils.jl");  using NextGenSeqUtils; \
         Pkg.clone("https://github.com/MurrellGroup/DPMeansClustering.jl"); using DPMeansClustering; \
