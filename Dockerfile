@@ -96,3 +96,5 @@ RUN julia -e ' \
         Pkg.clone("https://github.com/MurrellGroup/DPMeansClustering.jl"); using DPMeansClustering; \
         Pkg.clone("https://github.com/MurrellGroup/RobustAmpliconDenoising.jl"); using RobustAmpliconDenoising; \
     '
+
+RUN /opt/conda/bin/conda install ipywidgets beakerx;
