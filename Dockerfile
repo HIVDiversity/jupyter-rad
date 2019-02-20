@@ -80,21 +80,24 @@ RUN set -eux; \
 
 USER 1000
 
-RUN /opt/conda/bin/conda install matplotlib;
+RUN /opt/conda/bin/conda install matplotlib ipywidgets pandas docopt pyyaml;
 
 RUN julia -e ' \
         Pkg.init(); Pkg.update(); \
-        Pkg.add("Compat"); using Compat; \
         Pkg.add("IJulia"); using IJulia; \
+        Pkg.add("PyCall"); using PyCall; \
+        Pkg.add("PyPlot"); using PyPlot; \
+        Pkg.add("Pandas"); using Pandas; \
+        Pkg.add("Interact"); using Interact; \
+        Pkg.add("Compat"); using Compat; \
         Pkg.add("StatsBase"); using StatsBase; \
         Pkg.add("CSV"); using CSV; \
-        Pkg.add("Bio"); using Bio; \
+        Pkg.add("YAML"); using YAML; \
         Pkg.add("Gadfly"); using Gadfly; \
         Pkg.add("FreqTables"); using FreqTables; \
+        Pkg.add("Bio"); using Bio; \
         Pkg.clone("https://github.com/MurrellGroup/Rifraf.jl"); using Rifraf; \
         Pkg.clone("https://github.com/MurrellGroup/NextGenSeqUtils.jl");  using NextGenSeqUtils; \
         Pkg.clone("https://github.com/MurrellGroup/DPMeansClustering.jl"); using DPMeansClustering; \
         Pkg.clone("https://github.com/MurrellGroup/RobustAmpliconDenoising.jl"); using RobustAmpliconDenoising; \
     '
-
-RUN /opt/conda/bin/conda install ipywidgets beakerx;
