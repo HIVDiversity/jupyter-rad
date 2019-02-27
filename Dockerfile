@@ -80,7 +80,14 @@ RUN set -eux; \
 
 USER 1000
 
-RUN /opt/conda/bin/conda install matplotlib ipywidgets pandas docopt pyyaml;
+RUN /opt/conda/bin/conda install \
+    docopt \
+    ipywidgets \
+    matplotlib \
+    pandas \
+    pytables \
+    pyyaml \
+    seaborn
 
 RUN julia -e ' \
         Pkg.init(); Pkg.update(); \
